@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router'
-import { api } from '../services/api'
-
-function Signup() {
+import { api } from '../../services/api'
+function SignUp() {
   const [userName, setUserName] = useState("")
   const [userCpf, setUserCpf] = useState("")
   const [userEmail, setUserEmail] = useState("")
@@ -42,4 +41,4 @@ function Signup() {
   )
 }
 
-export default Signup
+export default SignUp
