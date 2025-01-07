@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router'
+import { api } from '../services/api'
 
 function Signup() {
   const [userName, setUserName] = useState("")
@@ -7,11 +8,18 @@ function Signup() {
   const [userEmail, setUserEmail] = useState("")
   const [userPassword, setUserPassword] = useState("")
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault()
     console.log(userEmail, userPassword)
+    const {data} = await api.post("/auth/register", {
+      name: "Lucas",
+      email: "lucas@gmail.com",
+      cpf: "11774516624",
+      password: "123456"
+    })
     alert("Registrando os dados")
   }
+
   return (
     <div>
         <form onSubmit={handleSubmit}>
