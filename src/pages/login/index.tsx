@@ -1,12 +1,25 @@
 import { useState } from "react"
 import { FaUser, FaLock } from "react-icons/fa"
 import { Link } from "react-router"
+import { useForm } from 'react-hook-form'
+import { z } from "zod"
+import { zodResolver } from '@hookform/resolvers/zod'
+
+const createUserFormSchema = z.object({
+  email: z.string().nonempty('e-mail é obrigatorio').email('Formato de e-mail invalido'),
+  password: z.string().nonempty('senha é obrigatoria'),
+})
+
+type createUserFormData = z.infer<typeof createUserFormSchema>
 
 function Login() {
   const [userEmail, setUserEmail] = useState("")
   const [userPassword, setUserPassword] = useState("")
+  const {register, handleSubmit, formState: {errors}} = useForm<createUserFormData>({
+    resolver: zodResolver(createUserFormSchema)
+  })
 
-  const handleSubmit = (event: any) => {
+  const consoleData = (event: any) => {
     event.preventDefault()
     console.log(userEmail, userPassword)
     alert("Enviando os dados")
@@ -14,15 +27,15 @@ function Login() {
 
   return (
     <div className="container">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(consoleData)}>
         <h1>Acesse o sistema</h1>
         <div>
-          <input type="email" placeholder="Email" onChange={(e) => setUserEmail(e.target.value)}/>
-          <FaUser className="icon"/>
+          <input type="email" placeholder="Email" {...register('email')}/>
+          {errors.email && <span>{errors.email.message}</span>}
         </div>
         <div>
-          <input type="password" placeholder="Senha" onChange={(e) => setUserPassword(e.target.value)}/>
-          <FaLock className="icon"/>
+          <input type="password" placeholder="Senha" {...register('password')}/>
+          {errors.password && <span>{errors.password.message}</span>}
         </div>
         <div className="recall-forget">
           <label>

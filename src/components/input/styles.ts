@@ -16,7 +16,6 @@ export const Icon = styled.div`
 export const InputStyle = styled.input`
   width:100%;
   font-size: 14px;
-  font-family: "Poppins", serif;
   border-radius: 5px;
   padding: 10px;
   border: 0.5px solid  #1E1E1E;
