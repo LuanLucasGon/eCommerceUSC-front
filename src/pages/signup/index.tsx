@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router'
 import { api } from '../../services/api'
+import Input from '../../components/input'
 
 type DataProps = {
   user: string,
@@ -46,18 +47,10 @@ function SignUp() {
     <div>
         <form onSubmit={handleSubmit}>
         <h1>Fazer registro</h1>
-        <div>
-          <input type="" placeholder="Nome" onChange={(e) => setName(e.target.value)}/>
-        </div>
-        <div>
-          <input type="" placeholder="CPF" onChange={(e) => setCpf(e.target.value)}/>
-        </div>
-        <div>
-          <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)}/>
-        </div>
-        <div>
-          <input type="password" placeholder="Senha" onChange={(e) => setPassword(e.target.value)}/>
-        </div>
+          <Input type="" placeholder="Nome" onChange={(e) => setName(e.target.value)}/>
+          <Input type="" placeholder="CPF" onChange={(e) => setCpf(e.target.value)}/>
+          <Input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)}/>
+          <Input type="password" placeholder="Senha" onChange={(e) => setPassword(e.target.value)}/>
         <button>Registrar</button>
       </form>
     </div>
