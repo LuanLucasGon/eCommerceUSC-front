@@ -1,14 +1,19 @@
-import React, { ButtonHTMLAttributes } from 'react'
+import React, { ButtonHTMLAttributes, forwardRef } from 'react';
 import { Container, ButtonStyle } from './styles';
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement>;
 
-function Button({children, ...props}: Props) {
+const Button = forwardRef<HTMLButtonElement, Props>(({ children, ...props }, ref) => {
   return (
     <Container>
-      <ButtonStyle {...props}>{children}</ButtonStyle>
+      <ButtonStyle ref={ref} {...props}>
+        {children}
+      </ButtonStyle>
     </Container>
-  )
-}
+  );
+});
 
-export default Button
+// Adicione o display name para depuração.
+Button.displayName = 'Button';
+
+export default Button;

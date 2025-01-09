@@ -4,6 +4,8 @@ import { Link } from "react-router"
 import { useForm } from 'react-hook-form'
 import { z } from "zod"
 import { zodResolver } from '@hookform/resolvers/zod'
+import Input from "../../components/input"
+import Button from "../../components/button"
 
 const createUserFormSchema = z.object({
   email: z.string().nonempty('e-mail é obrigatorio').email('Formato de e-mail invalido'),
@@ -20,7 +22,6 @@ function Login() {
   })
 
   const consoleData = (event: any) => {
-    event.preventDefault()
     console.log(userEmail, userPassword)
     alert("Enviando os dados")
   }
@@ -30,11 +31,9 @@ function Login() {
       <form onSubmit={handleSubmit(consoleData)}>
         <h1>Acesse o sistema</h1>
         <div>
-          <input type="email" placeholder="Email" {...register('email')}/>
+          <Input type="email" placeholder="Email" {...register('email')}/>
           {errors.email && <span>{errors.email.message}</span>}
-        </div>
-        <div>
-          <input type="password" placeholder="Senha" {...register('password')}/>
+          <Input type="password" placeholder="Senha" {...register('password')}/>
           {errors.password && <span>{errors.password.message}</span>}
         </div>
         <div className="recall-forget">
@@ -44,7 +43,7 @@ function Login() {
             <Link to="">Esqueceu sua senha?</Link>
           </label>
         </div>
-        <button>Entrar</button>
+        <Button>Entrar</Button>
         <div className="signup-link">
           <p>Não tem uma conta?<Link to="/signup">Registrar</Link></p>
         </div>
